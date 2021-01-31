@@ -8,6 +8,7 @@ docker run --name zabbix-server -t \
       -p 80:80 \
       -p 443:443\
       -e PHP_TZ="Asia/Shanghai" \
-      -d igread/zabbix-server:0.4
+      --net="bridge"\
+      -d registry.cn-hangzhou.aliyuncs.com/igread/zabbix-server:0.5
 ```
 
