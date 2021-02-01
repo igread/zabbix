@@ -1,11 +1,11 @@
 {
   "signing": {
       "default": {
-          "expiry": "87600000h"
+          "expiry": "876000h"
       },
       "profiles": {
           "server": {
-              "expiry": "87600000h",
+              "expiry": "876000h",
               "usages": [
                   "signing",
                   "key encipherment",
