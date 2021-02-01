@@ -1,5 +1,5 @@
 {
-    "CN": "example.net",
+    "CN": "zabbix",
     "hosts": [
         "*"
     ],
@@ -9,8 +9,8 @@
     },
     "names": [
         {
-            "C": "CN",
-            "L": "CA",
+            "C": "ALL",
+            "L": "ALL",
             "ST": "ALL"
         }
     ]

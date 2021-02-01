@@ -1,8 +1,7 @@
 {
     "CN": "example.net",
     "hosts": [
-        "example.net",
-        "www.example.net"
+        "zabbix"
     ],
     "key": {
         "algo": "ecdsa",
@@ -10,9 +9,9 @@
     },
     "names": [
         {
-            "C": "US",
-            "L": "CA",
-            "ST": "San Francisco"
+            "C": "ALL",
+            "L": "ALL",
+            "ST": "ALL"
         }
     ]
 }
