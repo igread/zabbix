@@ -25,7 +25,7 @@ jobs:
           - run: |
              set var_tag=$(echo ${var_ltag} | cut -d "/" -f 3 | cut -d "v" -f 2)
           
-          - run: echo ${var_tag}
+          - run: echo "::debug::${var_tag}"
 
           - name: Build the Docker image
             run: docker build . --file Dockerfile --tag zabbix-server:${var_tag}
