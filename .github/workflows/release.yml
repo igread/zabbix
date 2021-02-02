@@ -1,6 +1,4 @@
 name: Docker Image CI
-env: 
-  var_ltag: ${github.ref}
 
 on:
   release:
@@ -18,7 +16,8 @@ jobs:
           - uses: actions/checkout@v2
 
           - run: |
-              var_tag=$(echo ${var_ltag} | cut -d "/" -f 3 | cut -d "v" -f 2)
+              var_tag=$(echo ${github.ref} | cut -d "/" -f 3 | cut -d "v" -f 2)
+              echo var_tag
 
           - name: Build the Docker image
             run: docker build . --file Dockerfile --tag zabbix-server:${var_tag}
