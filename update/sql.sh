@@ -18,6 +18,8 @@ docker run --name zabbix-server -t \
       -p 443:443 -e PHP_TZ="Asia/Shanghai" \
       --net="bridge" \
       -d registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
+
+docker container update --restart=always zabbix-server
 docker cp /root/.zabbix/zabbix.sql zabbix-server:/tmp/zabbix.sql || exit
 
 while true; do
@@ -34,3 +36,4 @@ while true; do
       sleep 2
 
 done
+
