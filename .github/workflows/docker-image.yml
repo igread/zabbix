@@ -2,17 +2,22 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag ${{ matrix.image-name }}:${{ matrix.image-version }}
+
+      - name: push to aliyum
+        run: |
+        sudo docker login --username=${{ secrets.USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.PASSWORD }}
+        sudo docker tag ${{ matrix.image-name }}:${{ matrix.image-version }} registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ matrix.image-version }}
+        sudo docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ matrix.image-version }}
+

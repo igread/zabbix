@@ -12,6 +12,6 @@ docker run --name zabbix-server -t \
       -p 443:443\
       -e PHP_TZ="Asia/Shanghai" \
       --net="bridge"\
-      -d registry.cn-hangzhou.aliyuncs.com/igread/zabbix-server:latest
+      -d registry.cn-hangzhou.aliyuncs.com/vcun/zabbix
 ```
 
