@@ -13,16 +13,16 @@ jobs:
         steps:
           - uses: actions/checkout@v2
 
-          - run: echo ${{ github.ref }}
+          - run: re_ver=echo ${{ github.ref }} | cut -d "/" -f 3 | cut -d "v" -f 2
 
           - name: Build the Docker image
-            run: docker build . --file Dockerfile --tag zabbix-server:${{ github.ref }}
+            run: docker build . --file Dockerfile --tag zabbix-server:${{ re_ver }}
        
           
           - name: push to aliyum
             run: |
               docker login --username=${{ secrets.USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.PASSWORD }}
-              docker tag zabbix-server:${{ github.ref }} registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ github.ref }}
-              docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ github.ref }}
+              docker tag zabbix-server:${{ re_ver }} registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ re_ver }}
+              docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ re_ver }}
 
 
