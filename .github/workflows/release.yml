@@ -1,6 +1,10 @@
 name: Docker Image CI
 
+
 on:
+  push:
+    branches: [main]
+    
   release:
     types: [created] # published,created
 #  pull_request:
