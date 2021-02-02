@@ -4,7 +4,7 @@ name: Docker Image CI
 on:
   push:
     branches: [main]
-    
+
   release:
     types: [created] # published,created
 #  pull_request:
@@ -21,7 +21,8 @@ jobs:
 
           - run: |
               var_tag=$(echo ${github.ref} | cut -d "/" -f 3 | cut -d "v" -f 2)
-              echo var_tag
+          
+          - run: echo ${var_tag}
 
           - name: Build the Docker image
             run: docker build . --file Dockerfile --tag zabbix-server:${var_tag}
