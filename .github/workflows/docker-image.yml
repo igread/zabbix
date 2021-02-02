@@ -7,18 +7,14 @@ on:
 #    branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag zabbix-server:latest
-
-      - name: push to aliyum
-        run: |
-        sudo docker login --username=${{ secrets.USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.PASSWORD }}
-        sudo docker tag zabbix-server:latest registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
-        sudo docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
+      build:
+        runs-on: ubuntu-latest
         
-
+        steps:
+          - uses: actions/checkout@v2
+          - name: Build the Docker image
+            run: |
+            docker build . --file Dockerfile --tag zabbix-server:latest
+            sudo docker login --username=${{ secrets.USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.PASSWORD }}
+            sudo docker tag zabbix-server:latest registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
+            sudo docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
