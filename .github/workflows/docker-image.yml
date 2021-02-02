@@ -15,6 +15,6 @@ jobs:
           - name: Build the Docker image
             run: |
             docker build . --file Dockerfile --tag zabbix-server:latest
-            docker login --username=${{ secrets.USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.PASSWORD }}
-            docker tag zabbix-server:latest registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
-            docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
+           # docker login --username=${{ secrets.USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.PASSWORD }}
+           # docker tag zabbix-server:latest registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
+           # docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
