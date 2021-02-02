@@ -25,13 +25,13 @@ jobs:
           - run: echo ${{ var_tag }}
 
           - name: Build the Docker image
-            run: docker build . --file Dockerfile --tag zabbix-server:${var_tag}
+            run: docker build . --file Dockerfile --tag zabbix-server:${{ var_tag }}
        
           
           - name: push to aliyum
             run: |
               docker login --username=${secrets.USERNAME} registry.cn-hangzhou.aliyuncs.com --password=${secrets.PASSWORD}
-              docker tag zabbix-server:${var_tag} registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${var_tag}
-              docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${var_tag}
+              docker tag zabbix-server:${{ var_tag }} registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ var_tag }}
+              docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ var_tag }}
 
 
