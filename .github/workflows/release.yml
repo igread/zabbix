@@ -12,18 +12,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+# ${{ github.event.release }}
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set env
-        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/*/}
+     # - name: Set env
+      #  run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/*/}
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag zabbix-server:${{ env.RELEASE_VERSION }}
+        run: docker build . --file Dockerfile --tag zabbix-server:${{ github.event.release }}
 
       - name: push to aliyum
         run: |
           docker login --username=${{ secrets.USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.PASSWORD }}
-          docker tag zabbix-server:${{ env.RELEASE_VERSION }} registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ env.RELEASE_VERSION }}
-          docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ env.RELEASE_VERSION }}
+          docker tag zabbix-server:${{ github.event.release }} registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ github.event.release }}
+          docker push registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:${{ github.event.release }}
