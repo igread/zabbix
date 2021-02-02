@@ -13,11 +13,11 @@ jobs:
         steps:
           - uses: actions/checkout@v2
 
+          - run: echo ${{ github.ref }}
+
           - name: Build the Docker image
             run: docker build . --file Dockerfile --tag zabbix-server:${{ github.ref }}
-
-
-          - run: echo ${{ secrets.PASSWORD }}
+       
           
           - name: push to aliyum
             run: |
