@@ -15,13 +15,15 @@ docker rm zabbix-server -f
 docker run --name zabbix-server -t \
       -p 10051:10051 \
       -p 80:80 \
-      -p 443:443 -e PHP_TZ="Asia/Shanghai" \
+      -p 443:443 \
+      -e PHP_TZ="Asia/Shanghai" \
       --net="bridge" \
       -d registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
 
 docker container update --restart=always zabbix-server
 docker cp /root/.zabbix/zabbix.sql zabbix-server:/tmp/zabbix.sql || exit
 
+i=1
 while true; do
 
       docker exec zabbix-server /bin/sh -c "mysql -uzabbix -pzabbix zabbix < /tmp/zabbix.sql" 2>/dev/null
@@ -31,9 +33,9 @@ while true; do
 
             break
       fi
-
-      echo please wait..
-      sleep 2
+      echo "please wait(${i})"
+      i=$((i+1))
+      sleep 5
 
 done
 

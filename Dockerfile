@@ -1,5 +1,6 @@
 FROM zabbix/zabbix-appliance:latest
-ENV TZ=Asia/Shanghai
+ENV TZ=Asia/Shanghai \
+    PHP_TZ=Asia/Shanghai
 # COPY nginx.conf /etc/zabbix/nginx/
 COPY config_file/ /tmp/config_file/
 RUN apk add -U tzdata \
