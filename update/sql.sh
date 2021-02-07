@@ -11,7 +11,7 @@ docker exec zabbix-server /bin/sh -c "mysqldump -uzabbix -pzabbix --opt zabbix >
 docker cp zabbix-server:/tmp/zabbix.sql /root/.zabbix/zabbix.sql || exit
 
 docker rm zabbix-server -f
-
+docker volume prune -f
 docker run --name zabbix-server -t \
       -p 10051:10051 \
       -p 80:80 \
@@ -31,11 +31,12 @@ while true; do
       if [ $? == 0 ]; then
             docker exec zabbix-server /bin/sh -c "[ -f "/tmp/zabbix.sql" ] && rm /tmp/zabbix.sql"
 
+            echo -e "\e[1;32mThe database is imported successfully\e[0m"
+
             break
       fi
       echo "please wait(${i})"
-      i=$((i+1))
+      i=$((i + 1))
       sleep 5
 
 done
-
