@@ -15,3 +15,4 @@ docker run --name zabbix-server -t \
 ## 升级
 
 bash <(curl -sL https://github.uon.workers.dev/https://raw.githubusercontent.com/igread/zabbix/main/update/sql.sh)
+
