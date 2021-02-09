@@ -2,16 +2,22 @@
 
 docker pull registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
 
-docker exec zabbix-server /bin/sh -c "mysqldump -uzabbix -pzabbix --opt zabbix > /tmp/zabbix.sql" || exit
+docker exec zabbix-server /bin/sh -c "mysqldump -uzabbix -pzabbix --opt zabbix > /tmp/zabbix.sql" || (
+      echo "Database backup failed!"
+      exit
+)
 
 [ ! -d "/root/.zabbix" ] && mkdir -p "/root/.zabbix"
 
 [ -f "/root/.zabbix/zabbix.sql" ] && cp /root/.zabbix/zabbix.sql /root/.zabbix/zabbix.sql."$(date +"%Y%m%d%H%M%S")".bak
 
-docker cp zabbix-server:/tmp/zabbix.sql /root/.zabbix/zabbix.sql || exit
+docker cp zabbix-server:/tmp/zabbix.sql /root/.zabbix/zabbix.sql || (
+      echo "Database export failed!"
+      exit
+)
 
 docker rm zabbix-server -f
-docker volume prune -f
+# docker volume prune -f
 docker run --name zabbix-server -t \
       -p 10051:10051 \
       -p 80:80 \

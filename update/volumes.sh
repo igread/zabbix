@@ -13,4 +13,4 @@ docker run --name zabbix-server -t \
     --net="bridge"\
     -d registry.cn-hangzhou.aliyuncs.com/vcun/zabbix-server:latest
 docker container update --restart=always zabbix-server
-docker rm zabbix-server-temp
+docker rm zabbix-server-temp -f
